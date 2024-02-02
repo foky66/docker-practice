@@ -1,0 +1,17 @@
+version: '3.8' # docker-compose verziója
+services: # ez alatt lehet különböző szervizeket definiálni
+  db:
+    container_name: docker-sql-demo # tetszőleges container név
+    image: postgres # image név, mindig a legfrissebbet huzza le a DockerHub-ról
+    restart: always # leállítás után mindig újraindul
+    environment: # környezeti változók
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: car-brands
+    ports:
+      - "5500:5432" # port binding
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+
+volumes:
+  postgres-data:
